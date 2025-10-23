@@ -1,0 +1,43 @@
+{
+  "name": "BurnP3+ Wildfire Modeling Platform",
+  "description": "Deploy a complete wildfire burn probability modeling system with FastAPI backend, PostgreSQL, and Redis",
+  "repository": "https://github.com/Tphambolio/burnpthreeplus",
+  "services": {
+    "backend": {
+      "name": "BurnP3+ Backend",
+      "source": {
+        "repo": "Tphambolio/burnpthreeplus",
+        "branch": "claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6",
+        "directory": "backend"
+      },
+      "build": {
+        "command": "pip install poetry && poetry install --no-dev"
+      },
+      "start": {
+        "command": "alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT"
+      },
+      "healthcheck": {
+        "path": "/health",
+        "timeout": 100
+      },
+      "env": {
+        "ENVIRONMENT": "production",
+        "SECRET_KEY": {
+          "generate": true
+        },
+        "CORS_ORIGINS": "[\"*\"]",
+        "PYTHON_VERSION": "3.11"
+      }
+    },
+    "database": {
+      "name": "PostgreSQL",
+      "plugin": "postgresql",
+      "plan": "free"
+    },
+    "redis": {
+      "name": "Redis",
+      "plugin": "redis",
+      "plan": "free"
+    }
+  }
+}
