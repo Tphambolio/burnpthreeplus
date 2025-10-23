@@ -25,10 +25,10 @@ RUN pip install poetry==1.7.1
 RUN poetry config virtualenvs.create false
 
 # Copy dependency files
-COPY pyproject.toml poetry.lock* ./
+COPY pyproject.toml ./
 
-# Install dependencies
-RUN poetry install --no-dev --no-interaction --no-ansi
+# Install dependencies (without lock file for now)
+RUN poetry install --only main --no-interaction --no-ansi
 
 # Production stage
 FROM python:3.11-slim
