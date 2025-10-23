@@ -1,0 +1,40 @@
+FROM python:3.11-slim
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    gdal-bin \
+    libgdal-dev \
+    libpq-dev \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Set GDAL environment variables
+ENV GDAL_CONFIG=/usr/bin/gdal-config
+ENV CPLUS_INCLUDE_PATH=/usr/include/gdal
+ENV C_INCLUDE_PATH=/usr/include/gdal
+
+# Set working directory
+WORKDIR /app
+
+# Install Poetry
+RUN pip install poetry==1.7.1
+
+# Configure Poetry to not create virtual envs (using container isolation)
+RUN poetry config virtualenvs.create false
+
+# Copy dependency files
+COPY pyproject.toml poetry.lock* ./
+
+# Install dependencies
+RUN poetry install --no-root
+
+# Copy application code
+COPY . .
+
+# Expose port
+EXPOSE 8000
+
+# Run the application (overridden in docker-compose)
+CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "8000"]
