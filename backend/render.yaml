@@ -1,0 +1,65 @@
+services:
+  # Backend API
+  - type: web
+    name: burnp3-backend
+    runtime: python
+    plan: free
+    buildCommand: poetry install --no-dev
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    healthCheckPath: /health
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.0
+      - key: POETRY_VERSION
+        value: 1.7.1
+      - key: DATABASE_URL
+        fromDatabase:
+          name: burnp3-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: burnp3-redis
+          type: redis
+          property: connectionString
+      - key: ENVIRONMENT
+        value: production
+      - key: SECRET_KEY
+        generateValue: true
+      - key: S3_ENDPOINT
+        sync: false
+      - key: S3_ACCESS_KEY
+        sync: false
+      - key: S3_SECRET_KEY
+        sync: false
+      - key: S3_BUCKET_DATA
+        value: burnp3-data
+      - key: S3_BUCKET_RESULTS
+        value: burnp3-results
+
+  # Celery Worker
+  - type: worker
+    name: burnp3-worker
+    runtime: python
+    plan: free
+    buildCommand: poetry install --no-dev
+    startCommand: celery -A app.worker worker --loglevel=info
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: burnp3-db
+          property: connectionString
+      - key: REDIS_URL
+        fromService:
+          name: burnp3-redis
+          type: redis
+          property: connectionString
+
+databases:
+  - name: burnp3-db
+    plan: free
+    databaseName: burnp3
+    user: burnp3
+    postgresMajorVersion: 15
+
+  - name: burnp3-redis
+    plan: free

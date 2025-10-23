@@ -1,0 +1,28 @@
+{
+  "buildCommand": "pnpm install && pnpm build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "devCommand": "pnpm dev",
+  "installCommand": "pnpm install",
+  "env": {
+    "VITE_API_URL": "@burnp3_api_url",
+    "VITE_WS_URL": "@burnp3_ws_url"
+  },
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Access-Control-Allow-Origin",
+          "value": "*"
+        }
+      ]
+    }
+  ]
+}

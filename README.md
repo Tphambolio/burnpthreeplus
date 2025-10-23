@@ -32,45 +32,60 @@ BurnP3+ combines stochastic draws of fire ignition, weather, and burning conditi
 - [Architecture](./ARCHITECTURE.md) - Detailed system architecture and design
 - [Technology Stack](./TECH_STACK.md) - Technology choices and rationale
 - [Development Plan](./DEVELOPMENT_PLAN.md) - Phased development roadmap
+- **[QUICK_START.md](./QUICK_START.md)** - Deploy online in 10 minutes! 🚀
+- **[DEPLOYMENT.md](./DEPLOYMENT.md)** - Comprehensive cloud deployment guide
 
-## Quick Start
+## 🌐 Quick Start - Deploy Online (No Installation Required!)
 
-### Prerequisites
+**Deploy BurnP3+ to the cloud in 10 minutes - completely free!**
 
-- Docker and Docker Compose
-- Git
-- (Optional) Node.js 20+ and Python 3.11+ for local development
+### Option 1: Railway + Vercel (Recommended)
 
-### Setup
+#### Deploy Backend (Railway - 5 min)
+1. Sign up at https://railway.app with GitHub
+2. Click "New Project" → "Deploy from GitHub repo"
+3. Select your `burnpthreeplus` repository
+4. Add PostgreSQL: Click "New" → "PostgreSQL"
+5. Add Redis: Click "New" → "Redis"
+6. ✅ Backend deployed! Copy your Railway URL
 
-1. **Clone the repository**
+#### Deploy Frontend (Vercel - 3 min)
+1. Sign up at https://vercel.com with GitHub
+2. Import your `burnpthreeplus` repository
+3. Root Directory: `frontend`
+4. Add env var: `VITE_API_URL=https://your-backend.railway.app`
+5. ✅ Frontend deployed! Your app is live!
+
+**See [QUICK_START.md](./QUICK_START.md) for detailed step-by-step guide.**
+
+### Access Your Live Application
+
+Once deployed, your app will be accessible at:
+- **Frontend**: https://burnp3-app.vercel.app
+- **Backend API**: https://burnp3-backend.railway.app
+- **API Docs**: https://burnp3-backend.railway.app/api/v1/docs
+
+### Alternative Deployment Options
+
+- **Render**: Full deployment guide in [DEPLOYMENT.md](./DEPLOYMENT.md#option-2-render--vercel)
+- **Fly.io**: See [DEPLOYMENT.md](./DEPLOYMENT.md#option-3-all-on-flyio)
+
+---
+
+## 💻 Local Development (Optional)
+
+Want to develop locally? You can!
+
+1. **Clone and start**
    ```bash
    git clone https://github.com/yourusername/burnpthreeplus.git
    cd burnpthreeplus
+   docker compose up -d
    ```
 
-2. **Create environment file**
-   ```bash
-   cp .env.example .env
-   # Edit .env with your configuration if needed
-   ```
-
-3. **Start all services**
-   ```bash
-   docker-compose up -d
-   ```
-
-4. **Wait for services to be ready** (first run takes longer)
-   ```bash
-   docker-compose logs -f
-   ```
-
-5. **Access the application**
+2. **Access locally**
    - Frontend: http://localhost:3000
-   - Backend API: http://localhost:8000
-   - API Documentation: http://localhost:8000/api/v1/docs
-   - Celery Flower: http://localhost:5555
-   - MinIO Console: http://localhost:9001
+   - Backend API: http://localhost:8000/api/v1/docs
 
 ### Development Workflow
 
