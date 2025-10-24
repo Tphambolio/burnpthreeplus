@@ -1,0 +1,148 @@
+═══════════════════════════════════════════════════════════════
+  DEPLOY BURNP3+ TO VULTR MANUALLY (10 MINUTES)
+═══════════════════════════════════════════════════════════════
+
+STEP 1: CREATE VULTR VM (3 minutes)
+─────────────────────────────────────────────────────────────
+
+1. Go to: https://my.vultr.com/
+2. Click: "Deploy +" button (top right) or "Deploy New Server"
+3. Configure:
+
+   Server Type: Cloud Compute - Shared CPU
+   Location: Choose closest to you
+   Image: Ubuntu 22.04 x64
+   Plan: $12/month (2 vCPU, 4GB RAM, 80GB SSD) ← RECOMMENDED
+
+4. Scroll down:
+   - Server Hostname: burnp3-plus
+   - Server Label: BurnP3+ Production
+
+5. Click: "Deploy Now"
+6. Wait: ~60 seconds
+7. COPY: Your server IP address (shown in dashboard)
+
+
+STEP 2: CONNECT TO SERVER (1 minute)
+─────────────────────────────────────────────────────────────
+
+1. In Vultr dashboard, find your server's:
+   - IP Address (e.g., 123.456.78.90)
+   - Password (click the eye icon to reveal)
+
+2. On your local computer, open terminal and run:
+
+   ssh root@YOUR_SERVER_IP
+
+   (Replace YOUR_SERVER_IP with actual IP)
+
+3. Enter the password when prompted
+4. Type "yes" if asked about fingerprint
+
+
+STEP 3: RUN DEPLOYMENT (5 minutes)
+─────────────────────────────────────────────────────────────
+
+Copy and paste this ENTIRE block into your SSH session:
+
+────────────────────── COPY BELOW THIS LINE ──────────────────
+
+# Update system
+apt-get update && apt-get upgrade -y
+
+# Install Docker
+curl -fsSL https://get.docker.com -o get-docker.sh
+sh get-docker.sh
+rm get-docker.sh
+
+# Install Docker Compose
+apt-get install -y docker-compose-plugin
+
+# Clone repository
+cd /root
+git clone https://github.com/Tphambolio/burnpthreeplus.git
+cd burnpthreeplus
+
+# Checkout deployment branch
+git checkout claude/review-burnp3-deployment-011CURBzS2gzJ65GThTRVova
+
+# Deploy application
+docker compose up -d --build
+
+# Wait for startup
+echo "Waiting for services to start..."
+sleep 60
+
+# Show status
+echo ""
+echo "═══════════════════════════════════════════"
+echo "  DEPLOYMENT COMPLETE!"
+echo "═══════════════════════════════════════════"
+echo ""
+docker compose ps
+echo ""
+echo "Your BurnP3+ application is now running!"
+echo ""
+MY_IP=$(curl -s ifconfig.me)
+echo "Access your application at:"
+echo "  Frontend:  http://$MY_IP:3000"
+echo "  Backend:   http://$MY_IP:8000"
+echo "  API Docs:  http://$MY_IP:8000/docs"
+echo "  Flower:    http://$MY_IP:5555"
+echo ""
+
+────────────────────── COPY ABOVE THIS LINE ──────────────────
+
+
+STEP 4: ACCESS YOUR APPLICATION
+─────────────────────────────────────────────────────────────
+
+After the script completes, you'll see URLs like:
+
+  Frontend:  http://123.456.78.90:3000
+  Backend:   http://123.456.78.90:8000
+  API Docs:  http://123.456.78.90:8000/docs
+  Flower:    http://123.456.78.90:5555
+
+Open these URLs in your browser!
+
+
+STEP 5: CONFIGURE FIREWALL (Optional - 2 minutes)
+─────────────────────────────────────────────────────────────
+
+Still in your SSH session, run:
+
+ufw allow 22/tcp
+ufw allow 80/tcp
+ufw allow 443/tcp
+ufw allow 3000/tcp
+ufw allow 8000/tcp
+ufw allow 5555/tcp
+ufw --force enable
+
+
+═══════════════════════════════════════════════════════════════
+  USEFUL COMMANDS
+═══════════════════════════════════════════════════════════════
+
+View logs:
+  cd /root/burnpthreeplus
+  docker compose logs -f
+
+Restart services:
+  docker compose restart
+
+Stop everything:
+  docker compose down
+
+Update and restart:
+  git pull
+  docker compose up -d --build
+
+Check status:
+  docker compose ps
+
+
+═══════════════════════════════════════════════════════════════
+  COST: $12/month (Hourly billing - only pay for what you use!)
+═══════════════════════════════════════════════════════════════
