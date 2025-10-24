@@ -24,7 +24,7 @@ This guide will help you deploy BurnP3+ fully online using cloud services - **no
    - Click "New Project"
    - Select "Deploy from GitHub repo"
    - Choose your `burnpthreeplus` repository
-   - Select branch: `claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6`
+   - Select branch: `claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG`
 
 3. **Add PostgreSQL Database**
    - In your Railway project, click "New"
@@ -80,7 +80,7 @@ This guide will help you deploy BurnP3+ fully online using cloud services - **no
 2. **Import Project**
    - Click "Add New..." → "Project"
    - Import your `burnpthreeplus` repository
-   - Select branch: `claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6`
+   - Select branch: `claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG`
 
 3. **Configure Build Settings**
    - Framework Preset: `Vite`
@@ -152,7 +152,7 @@ This guide will help you deploy BurnP3+ fully online using cloud services - **no
 4. **Create Web Service**
    - New → Web Service
    - Connect your repository
-   - Select branch: `claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6`
+   - Select branch: `claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG`
    - Settings:
      - Name: `burnp3-backend`
      - Runtime: Python 3

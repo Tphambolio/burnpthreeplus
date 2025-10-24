@@ -47,7 +47,7 @@ git clone https://github.com/Tphambolio/burnpthreeplus.git
 cd burnpthreeplus
 
 # Switch to the correct branch
-git checkout claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6
+git checkout claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG
 
 # Run deployment script
 bash deploy-vm.sh
@@ -106,7 +106,7 @@ Log out and back in, then:
 ```bash
 git clone https://github.com/Tphambolio/burnpthreeplus.git
 cd burnpthreeplus
-git checkout claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6
+git checkout claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG
 docker-compose up -d
 ```
 
@@ -186,7 +186,7 @@ docker-compose down
 
 ### Update code and restart
 ```bash
-git pull origin claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6
+git pull origin claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG
 docker-compose up -d --build
 ```
 

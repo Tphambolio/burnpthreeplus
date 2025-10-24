@@ -28,7 +28,7 @@ fi
 
 echo ""
 echo "📦 Pulling latest code from GitHub..."
-git pull origin claude/initialize-burnp3-project-011CUPExpoSehx8oTKgwTVd6
+git pull origin claude/vultr-deployment-setup-011CURAy4ie4xo17LwA7xvhG
 
 echo ""
 echo "🔨 Building Docker images..."
