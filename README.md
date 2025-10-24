@@ -67,8 +67,11 @@ Once deployed, your app will be accessible at:
 
 ### Alternative Deployment Options
 
+- **Fly.io (One Command!)**: Automated deployment in 15 minutes! See [DEPLOY_FLYIO_QUICKSTART.md](./DEPLOY_FLYIO_QUICKSTART.md)
+  - Run: `bash deploy-flyio.sh`
+  - Full guide: [DEPLOY_FLYIO_STEP_BY_STEP.md](./docs/DEPLOY_FLYIO_STEP_BY_STEP.md)
 - **Render**: Full deployment guide in [DEPLOYMENT.md](./DEPLOYMENT.md#option-2-render--vercel)
-- **Fly.io**: See [DEPLOYMENT.md](./DEPLOYMENT.md#option-3-all-on-flyio)
+- **Docker on VM**: Deploy everything with Docker - [DEPLOY_VM.md](./docs/DEPLOY_VM.md)
 
 ---
 
