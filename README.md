@@ -1,6 +1,24 @@
-# BurnP3+ Web Application
+# BurnP3+ Deployment Repository
 
-A modern, web-based implementation of BurnP3+ (Burn Probability Plus) - a wildfire burn probability modeling system that uses Monte Carlo simulation methods to assess fire risk and susceptibility across landscapes.
+This repository contains deployment tools for BurnP3+ (Burn Probability Plus) - a wildfire burn probability modeling system that uses Monte Carlo simulation methods to assess fire risk and susceptibility across landscapes.
+
+## 🔥 Two Deployment Options Available
+
+### Option 1: Official SyncroSim BurnP3+ Desktop Application (Recommended)
+Deploy the official SyncroSim BurnP3+ desktop application to a Windows Server VM with GUI access.
+
+**What you get:**
+- ✅ Official SyncroSim Studio (Windows GUI)
+- ✅ BurnP3+ and BurnP3+Cell2Fire packages
+- ✅ Remote desktop access from anywhere
+- ✅ Follow official tutorials exactly as documented
+
+**Quick Start:** See [DEPLOY_SYNCROSIM_QUICKSTART.md](./DEPLOY_SYNCROSIM_QUICKSTART.md)
+
+**Full Guide:** See [docs/DEPLOY_SYNCROSIM_VM.md](./docs/DEPLOY_SYNCROSIM_VM.md)
+
+### Option 2: Web-Based BurnP3+ Application (Development)
+A modern, web-based reimplementation of BurnP3+ concepts with cloud deployment capabilities.
 
 ## Overview
 
